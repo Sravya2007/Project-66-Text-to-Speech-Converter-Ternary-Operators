@@ -14,6 +14,7 @@ export default class App extends React.Component {
   speak() {
     var thingToSay = this.state.text;
     Speech.speak(thingToSay);
+    console.log(thingToSay)
   }
 
   render() {
@@ -47,7 +48,37 @@ export default class App extends React.Component {
 
         <TouchableOpacity style = {styles.speechButton}
         onPress = {() => {
-          this.speak()
+          this.state.text === '' || this.state.text == ' '
+          ? alert("Please type your text to hear the speech.")
+          //rather than checking for the starting charcter, I am checking for the entire string using indexOf(). It returns -1 if the string is not there
+          : (this.state.text.indexOf('@') !== -1
+          || this.state.text.indexOf('#') !== -1
+          || this.state.text.indexOf('$') !== -1
+          || this.state.text.indexOf('%') !== -1
+          || this.state.text.indexOf('^') !== -1
+          || this.state.text.indexOf('&') !== -1
+          || this.state.text.indexOf('*') !== -1
+          || this.state.text.indexOf('(') !== -1
+          || this.state.text.indexOf(')') !== -1
+          || this.state.text.indexOf('<') !== -1
+          || this.state.text.indexOf('>') !== -1
+          || this.state.text.indexOf('~') !== -1
+          || this.state.text.indexOf('`') !== -1
+          || this.state.text.indexOf('[') !== -1
+          || this.state.text.indexOf(']') !== -1
+          || this.state.text.indexOf(';') !== -1
+          || this.state.text.indexOf('{') !== -1
+          || this.state.text.indexOf('}') !== -1
+          //escape character for forward slash
+          || this.state.text.indexOf('\\') !== -1
+          || this.state.text.indexOf('|') !== -1
+          || this.state.text.indexOf('_') !== -1
+          || this.state.text.indexOf('£') !== -1
+          || this.state.text.indexOf('₹') !== -1
+          || this.state.text.indexOf('¥') !== -1
+          || this.state.text.indexOf('€') !== -1
+          ? alert("Please avoid using special characters.")
+          : this.speak())
         }}>
           <Text style = {styles.displayText}>Hear Speech</Text>
         </TouchableOpacity>
